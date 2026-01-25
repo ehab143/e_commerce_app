@@ -23,7 +23,7 @@ class LoginViewBody extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
-          GoRouter.of(context).push(AppRouter.kProductsView);
+          GoRouter.of(context).push(AppRouter.kHomeView);
           isLoading = false;
         } else if (state is LoginFailure) {
           showSnackBar(context, state.errMessage);

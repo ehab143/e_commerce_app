@@ -1,8 +1,6 @@
 import 'package:e_commerce_app/features/product/presentation/views/widgets/products_view_body.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/bottom_navigation_bars.dart';
-
 class ProductsView extends StatelessWidget {
   const ProductsView({super.key});
 
@@ -32,7 +30,7 @@ class ProductsView extends StatelessWidget {
         ),
       ),
       backgroundColor: Color(0xffF8DADA),
-      bottomNavigationBar: BottomNavigationBars(),
+
       body: ProductsViewBody(),
     );
   }

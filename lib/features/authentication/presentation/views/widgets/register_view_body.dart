@@ -23,7 +23,7 @@ class RegisterViewBody extends StatelessWidget {
         if (state is RegisterLoading) {
           isLoading = true;
         } else if (state is RegisterSuccess) {
-          GoRouter.of(context).push(AppRouter.kProductsView);
+          GoRouter.of(context).push(AppRouter.kHomeView);
           isLoading = false;
         } else if (state is RegisterFailure) {
           showSnackBar(context, state.errMessage);

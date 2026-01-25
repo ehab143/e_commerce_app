@@ -2,10 +2,12 @@ import 'package:e_commerce_app/features/authentication/presentation/views/login_
 import 'package:e_commerce_app/features/authentication/presentation/views/register_view.dart';
 import 'package:e_commerce_app/features/authentication/presentation/views/reset_password_view.dart';
 import 'package:e_commerce_app/features/on_bording/presentation/views/on_bording_view.dart';
+import 'package:e_commerce_app/features/product/data/models/product_model.dart';
 import 'package:e_commerce_app/features/product/presentation/views/my_cart_view.dart';
 import 'package:e_commerce_app/features/product/presentation/views/my_favourites_view.dart';
 import 'package:e_commerce_app/features/product/presentation/views/product_details_view.dart';
 import 'package:e_commerce_app/features/product/presentation/views/products_view.dart';
+import 'package:e_commerce_app/features/product/presentation/views/widgets/bottom_navigation_bars.dart';
 import 'package:e_commerce_app/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,9 +21,14 @@ class AppRouter {
   static const String kProductDetailsView = '/ProductDetailsView';
   static const String kMyCartView = '/MyCartView';
   static const String kMyFavouritesView = '/MyFavourites';
+  static const String kHomeView = '/HomeView';
 
   static final router = GoRouter(
     routes: [
+      GoRoute(
+        path: kHomeView,
+        builder: (context, state) => const BottomNavigationBars(),
+      ),
       GoRoute(
         path: kSplashView,
         builder: (context, state) => const SplashView(),
@@ -36,8 +43,12 @@ class AppRouter {
       ),
       GoRoute(
         path: kProductDetailsView,
-        builder: (context, state) => const ProductDetailsView(),
+        builder: (context, state) {
+          final productModel = state.extra as ProductModel;
+          return ProductDetailsView(productModel: productModel);
+        },
       ),
+
       GoRoute(
         path: kOnBordingView,
         builder: (context, state) => const OnBordingView(),
