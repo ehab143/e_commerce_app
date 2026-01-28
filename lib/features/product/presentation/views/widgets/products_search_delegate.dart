@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:e_commerce_app/core/utilis/app_routes.dart';
@@ -7,6 +8,39 @@ class ProductsSearchDelegate extends SearchDelegate {
   final List<ProductModel> allProducts; // القائمة الكاملة
 
   ProductsSearchDelegate({required this.allProducts});
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    // نأخذ الثيم الحالي للتطبيق ونعدل عليه
+    final ThemeData theme = Theme.of(context);
+
+    return theme.copyWith(
+      // 1. لون خلفية شريط البحث + لون الأيقونات
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xffF8DADA), // نفس لون تطبيقك
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ), // لون سهم الرجوع وزر المسح
+        elevation: 0, // إزالة الظل (اختياري)
+      ),
+
+      // 2. لون النص الذي تكتبه والمؤشر
+      inputDecorationTheme: const InputDecorationTheme(
+        hintStyle: TextStyle(color: Colors.grey),
+        border: InputBorder.none,
+      ),
+
+      // 3. لون النص المكتوب فعلياً
+      textTheme: theme.textTheme.copyWith(
+        titleLarge: const TextStyle(color: Colors.black, fontSize: 18),
+      ),
+
+      // 4. لون مؤشر الكتابة (الخط اللي بيعمل وميض)
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: Colors.black,
+      ),
+    );
+  }
 
   // 1. زر المسح (X) الذي يظهر يمين شريط البحث
   @override
@@ -51,72 +85,78 @@ class ProductsSearchDelegate extends SearchDelegate {
 
     // إذا لم توجد نتائج
     if (filteredList.isEmpty) {
-      return const Center(child: Text("No products found"));
+      return Container(
+        color: Color(0xffF8DADA),
+        child: const Center(child: Text("No products found")),
+      );
     }
-    return ListView.builder(
-      clipBehavior: Clip.none,
-      itemCount: filteredList.length,
-      itemBuilder: (context, index) {
-        var item = filteredList[index];
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          child: Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 0,
-                      blurRadius: 30,
-                      offset: Offset(-3, 3),
+    return Container(
+      color: Color(0xffF8DADA),
+      child: ListView.builder(
+        clipBehavior: Clip.none,
+        itemCount: filteredList.length,
+        itemBuilder: (context, index) {
+          var item = filteredList[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 0,
+                        blurRadius: 30,
+                        offset: Offset(-3, 3),
+                      ),
+                    ],
+                  ),
+                  width: 100,
+                  height: 150,
+                  child: GestureDetector(
+                    onTap: () {
+                      GoRouter.of(
+                        context,
+                      ).push(AppRouter.kProductDetailsView, extra: item);
+                    },
+                    child: Card(
+                      elevation: 3,
+                      child: Image.network(item.imageUrl, fit: BoxFit.contain),
                     ),
-                  ],
-                ),
-                width: 100,
-                height: 150,
-                child: GestureDetector(
-                  onTap: () {
-                    GoRouter.of(
-                      context,
-                    ).push(AppRouter.kProductDetailsView, extra: item);
-                  },
-                  child: Card(
-                    elevation: 3,
-                    child: Image.network(item.imageUrl, fit: BoxFit.contain),
                   ),
                 ),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      '${item.price}\$',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      SizedBox(height: 8),
+                      Text(
+                        '${item.price}\$',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
     // عرض القائمة المفلترة
     // return ListView.builder(
