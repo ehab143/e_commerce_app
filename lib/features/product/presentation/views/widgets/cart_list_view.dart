@@ -86,9 +86,8 @@ class CartListView extends StatelessWidget {
               );
             },
           );
-        } else {
-          return Center(child: Text('No Items In Your Cart!'));
         }
+        return Center(child: Text('No Items In Your Cart!'));
       },
     );
   }

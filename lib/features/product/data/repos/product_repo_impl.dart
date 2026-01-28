@@ -12,11 +12,11 @@ class ProductRepoImpl implements ProductRepo {
   @override
   Future<Either<Failure, List<ProductModel>>> fetchAllProducts() async {
     try {
-      var responseData = await apiService.get(endPoints: 'products');
+      var data = await apiService.get(endPoints: 'products');
 
       List<ProductModel> products = [];
-      List<dynamic> dataList = responseData as List<dynamic>;
-      for (var item in dataList) {
+      //List<dynamic> dataList = responseData['products'];
+      for (var item in data['products']) {
         try {
           products.add(ProductModel.fromjson(item));
         } catch (e) {
@@ -25,7 +25,7 @@ class ProductRepoImpl implements ProductRepo {
       }
       return right(products);
     } catch (e) {
-      if (e is DioError) {
+      if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }
       return left(ServerFailure(e.toString()));

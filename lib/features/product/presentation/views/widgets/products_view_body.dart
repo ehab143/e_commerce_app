@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/core/errors/failure.dart';
 import 'package:e_commerce_app/features/product/data/manager/cubits/fetch_all_products/fetch_all_products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

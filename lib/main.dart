@@ -4,7 +4,6 @@ import 'package:e_commerce_app/features/authentication/data/cubits/auth_cubit/au
 import 'package:e_commerce_app/features/product/data/manager/cubits/cart_cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/product/data/manager/cubits/favourites_cubit/favourites_cubit.dart';
 import 'package:e_commerce_app/features/product/data/manager/cubits/fetch_all_products/fetch_all_products_cubit.dart';
-import 'package:e_commerce_app/features/product/data/repos/product_repo.dart';
 import 'package:e_commerce_app/features/product/data/repos/product_repo_impl.dart';
 import 'package:e_commerce_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

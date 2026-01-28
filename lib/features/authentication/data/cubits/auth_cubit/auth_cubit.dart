@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce_app/core/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 

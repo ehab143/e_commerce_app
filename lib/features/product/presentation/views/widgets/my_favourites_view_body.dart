@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_commerce_app/features/product/data/manager/cubits/favourites_cubit/favourites_cubit.dart';
 
 class MyFavouritesViewBody extends StatelessWidget {
+  const MyFavouritesViewBody({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavouritesCubit, FavouritesState>(

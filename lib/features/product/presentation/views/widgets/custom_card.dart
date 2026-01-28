@@ -34,7 +34,7 @@ class CustomCard extends StatelessWidget {
               elevation: 10,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
+                  horizontal: 5.0,
                   vertical: 10,
                 ),
                 child: Column(
@@ -42,15 +42,19 @@ class CustomCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      productModel.title.length >= 30
-                          ? productModel.title.substring(0, 25)
-                          : productModel.title.substring(0, 18),
+                      productModel.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Row(
                       children: [
                         Flexible(
                           child: Text(
-                            productModel.price,
+                            '\r${productModel.price}\$',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 16,
@@ -93,12 +97,12 @@ class CustomCard extends StatelessWidget {
           ),
 
           Positioned(
-            right: 35,
-            bottom: 140,
+            right: 28,
+            bottom: 130,
             child: Image.network(
               productModel.imageUrl,
-              width: 100,
-              height: 100,
+              width: 130,
+              height: 130,
             ),
           ),
         ],

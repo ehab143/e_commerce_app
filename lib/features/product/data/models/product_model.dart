@@ -8,7 +8,7 @@ class ProductModel extends Equatable {
   final String description;
   final String category;
 
-  ProductModel({
+  const ProductModel({
     required this.id,
     required this.title,
     required this.price,
@@ -22,7 +22,7 @@ class ProductModel extends Equatable {
       id: jsonData['id'],
       title: jsonData['title'],
       price: jsonData['price'].toString(),
-      imageUrl: jsonData['image'],
+      imageUrl: jsonData['thumbnail'],
       description: jsonData['description'],
       category: jsonData['category'],
     );

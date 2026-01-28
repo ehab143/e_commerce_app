@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/helper/show_dialog.dart';
 import 'package:e_commerce_app/core/utilis/app_routes.dart';
 import 'package:e_commerce_app/features/authentication/presentation/views/widgets/custom_button.dart';
 import 'package:e_commerce_app/features/product/data/manager/cubits/cart_cubit/cart_cubit.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {
-  ProductDetailsViewBody({super.key, required this.productModel});
+  const ProductDetailsViewBody({super.key, required this.productModel});
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,8 @@ class ProductDetailsViewBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              productModel.price,
+              '${productModel.price}\$',
+
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -60,8 +62,11 @@ class ProductDetailsViewBody extends StatelessWidget {
                 return CustomButton(
                   text: 'Add to Cart',
                   onTap: () {
+                    // 1. إضافة المنتج للسلة
                     BlocProvider.of<CartCubit>(context).addToCart(productModel);
-                    GoRouter.of(context).push(AppRouter.kHomeView);
+
+                    // 2. إظهار الـ Dialog
+                    ShowDialog(context, productModel);
                   },
                 );
               },
